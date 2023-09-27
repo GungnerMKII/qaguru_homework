@@ -24,4 +24,5 @@ def test_text_form(open_demoqa_textbox):
     browser.element('#output #email').should(have.text('test@test.com'))
     browser.element('#output #currentAddress').should(have.text('adress'))
     browser.element('#output #permanentAddress').should(have.text('same as current'))
+    #add comment for lesson 3
     
