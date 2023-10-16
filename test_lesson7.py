@@ -5,7 +5,7 @@ from zipfile import ZipFile
 from openpyxl.reader.excel import load_workbook
 from utils import RESOURCES_PATH, TMP_PATH, ZIP_PATH, PDF_FILE, TXT_FILE, XLS_FILE, XLSX_FILE
 
-def test_create_archive():
+def test_archive_exists():
     assert os.path.exists(ZIP_PATH)
 
 def test_check_files_in_archive():
