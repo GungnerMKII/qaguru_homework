@@ -1,14 +1,11 @@
 import pytest
-import os
-import shutil
-from utils import TMP_PATH, RESOURCES_PATH
+from homework.models import Product, Cart
 
-@pytest.fixture(scope='session', autouse=True)
-def create_delete_zip():
-    if not os.path.exists(TMP_PATH):
-        os.mkdir('tmp')
-    shutil.make_archive('archive', 'zip', RESOURCES_PATH)
-    shutil.move('archive.zip', os.path.join(TMP_PATH, 'archive.zip'))
-        
-    yield
-    shutil.rmtree(TMP_PATH)
+
+@pytest.fixture
+def product():
+    return Product("book", 100, "This is a book", 1000)
+
+@pytest.fixture
+def cart():
+    return Cart()

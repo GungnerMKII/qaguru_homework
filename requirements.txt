@@ -1,4 +1,1 @@
 pytest==7.4.2
-pypdf
-xlrd
-openpyxl
