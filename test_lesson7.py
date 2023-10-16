@@ -1,15 +1,11 @@
 import os
 import xlrd
-import shutil
 from pypdf import PdfReader
 from zipfile import ZipFile
 from openpyxl.reader.excel import load_workbook
 from utils import RESOURCES_PATH, TMP_PATH, ZIP_PATH, PDF_FILE, TXT_FILE, XLS_FILE, XLSX_FILE
 
 def test_create_archive():
-    shutil.make_archive('archive', 'zip', RESOURCES_PATH)
-    shutil.move('archive.zip', os.path.join(TMP_PATH, 'archive.zip'))
-    # Проверяем существование архива
     assert os.path.exists(ZIP_PATH)
 
 def test_check_files_in_archive():
