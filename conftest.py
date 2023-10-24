@@ -1,11 +1,13 @@
 import pytest
-from homework.models import Product, Cart
+from selene import browser
+from selenium import webdriver
 
-
-@pytest.fixture
-def product():
-    return Product("book", 100, "This is a book", 1000)
-
-@pytest.fixture
-def cart():
-    return Cart()
+@pytest.fixture(scope="function", autouse=True)
+def setting_browser():
+    driver_options = webdriver.ChromeOptions()
+    driver_options.add_argument('--headless=new')
+    browser.config.driver_options = driver_options
+    browser.config.window_width = 1080
+    browser.config.window_height = 860
+    yield
+    browser.quit() 
