@@ -1,10 +1,5 @@
-from selene.support import by
-from selene.support.conditions import be
-from selene.support.shared import browser
-from selene.support.shared.jquery_style import s
-import allure
 from allure_commons.types import Severity
-import steps
+from tests.steps import *
 
 repo = "GungnerMKII/qaguru_homework"
 
@@ -56,10 +51,10 @@ def test_steps():
 @allure.story("Проверка наличия Issue в репозитории")
 @allure.link("https://github.com", name="Testing")
 def test_with_decorators():
-    steps.open_main_page()
-    steps.find_repository(repo)
-    steps.open_repository(repo)
-    steps.open_issues_tab()
-    steps.find_issue()
+    open_main_page()
+    find_repository(repo)
+    open_repository(repo)
+    open_issues_tab()
+    find_issue()
 
 
