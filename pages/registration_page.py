@@ -1,5 +1,6 @@
 from selene import browser, be, have, command
-import resources
+from data.users import User
+from resources import path
 
 
 class RegistrationPage:
@@ -46,10 +47,8 @@ class RegistrationPage:
         browser.element('//label[@for="hobbies-checkbox-1"]').click()
         browser.element('//label[@for="hobbies-checkbox-3"]').click()
 
-    def upload_picture(self):
-        browser.element("#uploadPicture").should(be.blank).send_keys(
-            resources.path("img/meme.png")
-        )
+    def upload_picture(self, value):
+        browser.element("#uploadPicture").should(be.blank).send_keys(path(value))
 
     def fill_address(self, address):
         browser.element("#currentAddress").send_keys(f"{address}")
@@ -69,32 +68,33 @@ class RegistrationPage:
     def submit(self):
         browser.element("#submit").perform(command.js.click)
 
-    def should_registered_user_with(
-        self,
-        full_name,
-        email,
-        gender,
-        phone,
-        date_of_birth,
-        subject,
-        hobbies,
-        file,
-        address,
-        state_city,
-    ):
+    def register(self, user: User):
+        self.fill_first_name(user.first_name)
+        self.fill_last_name(user.last_name)
+        self.fill_email(user.email)
+        self.select_gender(user.gender)
+        self.fill_phone_number(user.phone)
+        self.select_date_of_birth(user.month_birth, user.day_birth, user.year_birth)
+        self.select_subject(user.subject)
+        self.select_hobbies()
+        self.upload_picture(user.photo)
+        self.fill_address(user.current_address)
+        self.select_state(user.state)
+        self.select_city(user.city)
+        self.submit()
+
+    def should_registered_user_with(self, user: User):
         browser.element(".table").all("td").even.should(
             have.exact_texts(
-                full_name,
-                email,
-                gender,
-                phone,
-                date_of_birth,
-                subject,
-                hobbies,
-                file,
-                address,
-                state_city,
+                f"{user.first_name} {user.last_name}",
+                user.email,
+                user.gender,
+                user.phone,
+                f"{user.day_birth} {user.month_birth},{user.year_birth}",
+                user.subject,
+                user.hobbies,
+                user.photo,
+                user.current_address,
+                f"{user.state} {user.city}",
             )
         )
-
-        browser.element("#closeLargeModal").click()
