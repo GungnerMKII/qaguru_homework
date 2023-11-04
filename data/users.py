@@ -1,5 +1,4 @@
 import dataclasses
-from resources import path
 
 
 @dataclasses.dataclass
