@@ -12,10 +12,10 @@ class RegistrationPage:
         browser.open("/automation-practice-form")
 
     def fill_first_name(self, name):
-        browser.element("#firstName").send_keys(name)
+        self.first_name.type(name)
 
     def fill_last_name(self, last_name):
-        browser.element("#lastName").send_keys(last_name)
+        self.last_name.type(last_name)
 
     def fill_email(self, email):
         browser.element("#userEmail").send_keys(email)
