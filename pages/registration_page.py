@@ -14,6 +14,7 @@ class RegistrationPage:
 
         def open_form(self):
             browser.open("/automation-practice-form")
+            return self
 
     def fill_first_name(self, name):
         self.first_name.type(name)
@@ -87,6 +88,7 @@ class RegistrationPage:
             self.select_state(user.state)
             self.select_city(user.city)
             self.submit()
+            return self
 
     with allure.step("Проверяем регистрацию"):
 
